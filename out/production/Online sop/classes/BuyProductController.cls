@@ -16,28 +16,6 @@ public with sharing class BuyProductController {
     public Product__c soldProduct;
 
     public BuyProductController(){
-        currentUser = [SELECT Id, Username, isDiscount__c FROM User WHERE Username = :UserInfo.getUserName()];
-        contact = new Contacts__c();
-        soldRecordType = new RecordType();
-        productId =  ApexPages.currentPage().getParameters().get('productId');
-        product = [SELECT Id, Name, Img_Url__c, Description__c, Amount__c, Number_of_purchase__c,
-                Date_of_purchase__c, Date_of_receipt__c, Title__c,
-                Cost__c  FROM Product__c WHERE Id = :productId];
-        if (currentUser.isDiscount__c == true) {
-            discount =  [SELECT Id, End_Discount_Data__c, Static_discount__c, Percentes_of_discount__c, Status__c, Discount_Code__c
-                         FROM Discount__c
-                         WHERE Id = :ApexPages.currentPage().getParameters().get('discountId')];
-            newPrice = DiscountHelper.CalculateDiscount(discount, product);
-            endDiscount = Label.Days + ': ' + String.valueOf(discount.End_Discount_Data__c.day() - Datetime.now().day()) + ' '
-                    + Label.Hours + ': '
-                    + (discount.End_Discount_Data__c.hour() > Datetime.now().hour() ? String.valueOf(discount.End_Discount_Data__c.hour() - Datetime.now().hour()) :
-                    String.valueOf( Datetime.now().hour() - discount.End_Discount_Data__c.hour() ))
-                    + ' ' + Label.Minutes + ': '
-                    + (discount.End_Discount_Data__c.minute() > Datetime.now().minute() ? String.valueOf(discount.End_Discount_Data__c.minute() - Datetime.now().minute()) :
-                    String.valueOf( Datetime.now().minute() - discount.End_Discount_Data__c.minute() ));
-        }
-        else discount = new Discount__c();
-        System.debug(newPrice);
     }
 
     public Product__c getProduct(){
