@@ -1,0 +1,36 @@
+<apex:page id="SuccessOrder" controller="ProductListController" standardStylesheets="false"
+           showHeader="false" applyHtmlTag="false"  docType="html-5.0">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+    <head>
+        <apex:includeScript value="{!URLFOR($Resource.Jquery)}"/>
+        <apex:includeScript value="{!URLFOR($Resource.JqSession)}"/>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+              integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"/>
+        <apex:slds />
+        <apex:stylesheet value="{!URLFOR($Resource.details)}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.headerStyle)}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.mainStyle)}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.crossIcon)}"/>
+        <style type="text/css">a {text-decoration: none !important}</style>
+    </head>
+    <body>
+    <c:header/>
+    <div class="slds-scope">
+        <div class="slds-grid ">
+            <div class="slds-col slds-size_4-of-12"/>
+            <div class="slds-col slds-size_3-of-12 slds-m-top--xx-large">
+                <span class="slds-text-heading_large">Thank you for order!</span>
+            </div>
+            <div class="slds-col slds-1-of-12 slds-m-top--xx-large">
+                <button class="slds-button slds-button_neutral"><a href="{!URLFOR($Page.Product_list)}">Continue shopping</a></button>
+            </div>
+            <div class="slds-col slds-size_4-of-12"></div>
+        </div>
+    </div>
+    <script src="{!URLFOR($Resource.productJs)}"/>
+    </body>
+    </html>
+</apex:page>

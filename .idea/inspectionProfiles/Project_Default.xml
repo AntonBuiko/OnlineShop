@@ -1,0 +1,9 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PMDApex" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="pmdPath" value="$USER_HOME$/Desktop/pmd-bin-6.17.0/bin/pmd.bat" />
+      <option name="rulesetPath" value="$USER_HOME$/Desktop/rules.xml" />
+    </inspection_tool>
+  </profile>
+</component>

@@ -1,0 +1,90 @@
+<apex:page id="BuyProduct" controller="ProductListController" standardStylesheets="false"
+           showHeader="false" applyHtmlTag="false"  docType="html-5.0">
+    <apex:remoteObjects jsNamespace="SObjectModel">
+        <apex:remoteObjectModel name="Contact"  fields="Id,LastName, Phone">
+            <apex:remoteObjectField name="onlineStore__Email__c" jsShorthand="Email"/>
+            <apex:remoteObjectField name="onlineStore__Address__c" jsShorthand="Address"/>
+        </apex:remoteObjectModel>
+        <apex:remoteObjectModel name="Discount__c" jsShorthand="discount"  fields="Id,Name">
+            <apex:remoteObjectField name="onlineStore__Discount_Code__c" jsShorthand="Discount_Code"/>
+            <apex:remoteObjectField name="onlineStore__Status__c" jsShorthand="Status"/>
+            <apex:remoteObjectField name="onlineStore__Percentes_of_discount__c" jsShorthand="Percentes_of_discount"/>
+            <apex:remoteObjectField name="onlineStore__Static_discount__c" jsShorthand="Static_discount"/>
+        </apex:remoteObjectModel>
+        <apex:remoteObjectModel name="Product__c" jsShorthand="product"  fields="Id, Name">
+            <apex:remoteObjectField name="onlineStore__Contacts__c" jsShorthand="Contact"/>
+            <apex:remoteObjectField name="onlineStore__Cost__c" jsShorthand="Cost"/>
+            <apex:remoteObjectField name="onlineStore__Amount__c" jsShorthand="Amount"/>
+            <apex:remoteObjectField name="onlineStore__Date_of_purchase__c" jsShorthand="Date_of_purchase"/>
+            <apex:remoteObjectField name="onlineStore__Date_of_receipt__c" jsShorthand="Date_of_receipt"/>
+            <apex:remoteObjectField name="onlineStore__Img_Url__c" jsShorthand="Img_Url"/>
+            <apex:remoteObjectField name="onlineStore__Number_of_purchase__c" jsShorthand="Number_of_purchase"/>
+            <apex:remoteObjectField name="onlineStore__Store__c" jsShorthand="Store"/>
+            <apex:remoteObjectField name="onlineStore__Title__c" jsShorthand="Title"/>
+            <apex:remoteObjectField name="RecordTypeId" jsShorthand="RecordType"/>
+        </apex:remoteObjectModel>
+    </apex:remoteObjects>
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+    <head>
+        <apex:includeScript value="{!URLFOR($Resource.Jquery)}"/>
+        <apex:includeScript value="{!URLFOR($Resource.JqSession)}"/>
+        <script type="module" src="{!URLFOR($Resource.buyProductModule)}"/>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+              integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"/>
+        <apex:slds />
+        <apex:stylesheet value="{!URLFOR($Resource.details)}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.headerStyle)}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.mainStyle)}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.crossIcon)}"/>
+        <style type="text/css">a {text-decoration: none !important}</style>
+    </head>
+    <body>
+    <c:header/>
+    <div class="slds-scope">
+        <div class="slds-grid ">
+            <div class="slds-col slds-size_3-of-12"/>
+            <div class="slds-col slds-size_3-of-12 slds-m-top--xx-large">
+                        <form id="contactForm">
+                            <div id="emailElementControl" class="slds-form-element">
+                                <label class="slds-form-element__label">
+                                    <abbr class="slds-required" title="required">* </abbr>Your email</label>
+                                <div class="slds-form-element__control">
+                                    <input id="email" type="email" data-required="true" aria-describedby="validateLogin" required="" class="slds-input" />
+                                </div>
+                                <!--<div class="slds-form-element__help" id="validateLogin">Login is required</div>-->
+                            </div>
+
+                            <div id="addressElementControl" class="slds-form-element">
+                                <label class="slds-form-element__label">
+                                    <abbr class="slds-required" title="required">* </abbr>Your address</label>
+                                <div class="slds-form-element__control">
+                                    <input id="address" type="text" data-required="true" aria-describedby="validatePass"  required="" class="slds-input" />
+                                </div>
+                                <!--<div class="slds-form-element__help" id="validatePass">Password is required</div>-->
+                            </div>
+
+                            <div id="phoneElementControl" class="slds-form-element">
+                                <label class="slds-form-element__label">
+                                    <abbr class="slds-required" title="required">* </abbr>Your phone</label>
+                                <div class="slds-form-element__control">
+                                    <input id="phone" type="phone" data-required="true" aria-describedby="validatePhone"  required="" class="slds-input" />
+                                </div>
+                                <!--<div class="slds-form-element__help" id="validatePhone">Password is required</div>-->
+                            </div>
+
+                            <button type="button" id="BuyButton" class="slds-button slds-button_neutral slds-m-around--large">Buy</button>
+                        </form>
+            </div>
+            <div id="orderProducts" class="slds-col slds-size_3-of-12 slds-m-top--xx-large slds-m-left--large">
+
+            </div>
+            <div class="slds-col slds-size_2-of-12"></div>
+        </div>
+    </div>
+    <script src="{!URLFOR($Resource.productJs)}"/>
+    </body>
+    </html>
+</apex:page>

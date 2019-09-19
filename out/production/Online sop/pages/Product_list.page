@@ -1,0 +1,83 @@
+<apex:page action="{!init}" id="Product_list" controller="ProductListController" standardStylesheets="false"
+         showHeader="false" applyHtmlTag="false"  docType="html-5.0">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="x-ua-compatible" content="ie=edge" />
+            <title>Salesforce Lightning Design System Trailhead Module</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+                  integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"/>
+            <apex:slds />
+            <apex:stylesheet value="{!URLFOR($Resource.details)}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.headerStyle)}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.mainStyle)}"/>
+            <style type="text/css">a {text-decoration: none !important}</style>
+        </head>
+
+        <body>
+            <c:header/>
+            <apex:pageMessages id="errorMessage"></apex:pageMessages>
+            <apex:form>
+                <apex:inputText alt="Search" value="{!searchString}">
+                    <apex:actionSupport event="onkeyup" reRender="listProducts"/>
+                </apex:inputText>
+            </apex:form>
+            <apex:form>
+                <apex:pageBlock >
+                    <apex:pageBlockTable id="listProducts" value="{!products}" var="product">
+                        <apex:column width="10%" headerValue="{!$Label.Image}">
+                            <apex:image url="{!product.Img_Url__c}" width="150" height="150"/>
+                        </apex:column>
+                        <apex:column width="20%" headerValue="{!$Label.Product_Name}" value="{!product.Name}"/>
+                        <apex:column headerValue="{!$Label.Title}" value="{!product.Title__c}"/>
+                        <apex:column width="40%"  headerValue="{!$Label.Description}">
+                            <apex:outputPanel layout="block" >
+                                <div class="ellipsis">{!product.Description__c}</div>
+                                <apex:commandLink value="details" action="{!toDetailPage}">
+                                    <apex:param name="productId" value="{!product.Id}" assignTo="{!productId}"/>
+                                </apex:commandLink>
+                            </apex:outputPanel>
+                        </apex:column>
+                        <apex:column headerValue="{!$Label.Amount}" value="{!product.Amount__c}"/>
+                        <apex:column headerValue="{!$Label.Cost}">
+                                <apex:outputText>
+                                    <p><label>{!$Label.Cost}: </label>${!product.Cost__c}</p>
+                                </apex:outputText>
+                                <apex:outputText rendered="{!IF(currentUser.isDiscount__c == true, true, false)}">
+                                            <apex:repeat value="{!discountMap[product.Id]}" var="innerKey">
+                                                <p>{!$Label.New_price}: <label>{!discountMap[product.Id][innerKey]}</label></p>
+                                            </apex:repeat>
+                                </apex:outputText>
+                        </apex:column>
+                        <apex:column>
+                            <apex:commandButton value="{!$Label.Buy}"  reRender="thePanel" action="{!toBuyProduct}">
+                                <apex:param name="productId" value="{!product.Id}" assignTo="{!productId}"/>
+                            </apex:commandButton>
+                        </apex:column>
+                    </apex:pageBlockTable>
+                    <apex:outputpanel layout="block" id="thePanel">
+
+                        {!productId}
+
+                    </apex:outputpanel>
+                </apex:pageBlock>
+            </apex:form>
+            <div class="slds-scope">
+                <div id="products" class="slds-grid slds-gutters">
+                    <div class="slds-col slds-size_2-of-6 slds-align_absolute-center slds-m-around_small"/>
+                    <div class="slds-col slds-size_4-of-6 slds-align_absolute-center slds-m-around_small">
+                        <apex:repeat value="{!products}" var="product">
+                            <div class="slds-col slds-size_1-of-4 slds-align_absolute-center slds-m-around_small ">
+                                <div class="productBlock">
+                                    <span>{!product.Name}</span>
+                                </div>
+                            </div>
+                        </apex:repeat>
+                    </div>
+                    <div class="slds-col slds-size_2-of-6 slds-align_absolute-center slds-m-around_small "/>
+                </div>
+            </div>
+        </body>
+    </html>
+</apex:page>

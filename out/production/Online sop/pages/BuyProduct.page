@@ -1,0 +1,35 @@
+<apex:page docType="html-5.0" id="BuyProduct" controller="BuyProductController">
+    <apex:pageBlock>
+                    <apex:form id="inputContact">
+                        <apex:pageBlockSection columns="12" >
+                                    <apex:pageBlockSection columns="1" >
+                                        <a href="/apex/Product_list">{!$Label.Shopping}</a>
+                                        <apex:inputField label="{!$Label.Email}" required="true" id="Email" value="{!contact.Email__c}"/>
+                                        <apex:inputField label="{!$Label.Contact_name}" required="true" id="Name" value="{!contact.Name}"/>
+                                        <apex:inputField label="{!$Label.Address}" required="true" id="Address" value="{!contact.Address__c}"/>
+                                        <apex:inputField label="{!$Label.Phone}" required="true" id="Phone" value="{!contact.Phone__c}"/>
+                                        <apex:inputField label="{!$Label.Discount}" value="{!discount.Discount_Code__c}"
+                                                         rendered="{!IF(currentUser.isDiscount__c == true, false, true)}"/>
+                                    </apex:pageBlockSection>
+                            <apex:pageBlockSectionItem>
+                                   <apex:image value="{!product.Img_Url__c}" width="150" height="150"/>
+                                    <apex:outputPanel  layout="block">
+                                        <apex:outputField label="{!$Label.Product_Name}" value="{!product.Name}"/>
+                                        <apex:outputField label="{!$Label.Description}" value="{!product.Description__c}"/>
+                                        <apex:pageBlockSection columns="1">
+                                            <apex:outputText label="{!$Label.Cost}: " value="{!product.Cost__c}"/>
+                                            <apex:outputText label="{!$Label.New_price}: " rendered="{!IF(newPrice != null && product.Cost__c != newPrice, true, false)}" value="{!newPrice}"/>
+                                            <apex:outputText label="{!$Label.End_discount}: " rendered="{!IF(newPrice != null && product.Cost__c != newPrice, true, false)}" value="{!endDiscount}"/>
+                                        </apex:pageBlockSection>
+                                        <apex:pageBlockSection columns="1">
+                                            <apex:outputField label="{!$Label.Amount}" value="{!product.Amount__c}"/>
+                                        </apex:pageBlockSection>
+                                    </apex:outputPanel>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem>
+                                <apex:commandButton action="{!SubmitOrder}" reRender="errorMessage" style="width: 100px; height:100px;" value="{!$Label.Buy}"/>
+                            </apex:pageBlockSectionItem>
+                        </apex:pageBlockSection>
+                    </apex:form>
+    </apex:pageBlock>
+</apex:page>

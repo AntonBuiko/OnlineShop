@@ -1,0 +1,20 @@
+<apex:page id="SuccessOrder" controller="SuccesOrderController">
+    <apex:pageBlock >
+        <apex:pageBlockSection columns="1">
+            <apex:outputLabel value="{!user}, {!$Label.SuccessOrder}"></apex:outputLabel>
+        </apex:pageBlockSection>
+        <apex:pageBlock>
+                <apex:pageBlockSection columns="1">
+                <apex:image value="{!product.Img_Url__c}" width="150" height="150"/>
+                <apex:outputPanel  layout="block">
+                    <apex:outputField label="{!$Label.Product_name}" value="{!product.Name}"/>
+                    <apex:outputField label="{!$Label.Description}" value="{!product.Description__c}"/>
+                    <apex:pageBlockSection columns="1">
+                        <apex:outputField label="{!$Label.Amount}" value="{!product.Amount__c}"/>
+                        <apex:outputText label="{!$Label.Cost}: " value="${!product.Cost__c}"/>
+                    </apex:pageBlockSection>
+                </apex:outputPanel>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:pageBlock>
+</apex:page>

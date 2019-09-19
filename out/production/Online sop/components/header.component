@@ -1,0 +1,26 @@
+<apex:component id="header">
+    <div class="slds-scope">
+        <nav id="header" class="slds-grid slds-gutters">
+            <div id="logo" class="slds-col slds-size_2-of-4 slds-align_absolute-center slds-m-around_small ">
+                <a href="#"><i class="fab fa-apple"></i>nlinestoremagaz</a>
+            </div>
+            <div class="slds-col slds-has-flexi-truncate slds-size_1-of-4 slds-align_absolute-center slds-m-around_medium">
+                <div class="slds-col slds-has-flexi-truncate slds-size_1-of-4 slds-align_absolute-center slds-m-horizontal_xxx-small ">
+                    <a href="#" class="slds-text-link_reset">Store</a>
+                </div>
+                <div class="slds-col slds-has-flexi-truncate slds-size_1-of-4 slds-align_absolute-center slds-m-horizontal_xxx-small ">
+                    <a href="#" class="slds-text-link_reset">About</a>
+                </div>
+                <div class="slds-col slds-has-flexi-truncate slds-size_1-of-4 slds-align_absolute-center slds-m-horizontal_xxx-small">
+                    <a href="#" class="slds-text-link_reset">Support</a>
+                </div>
+                <div class="slds-col slds-has-flexi-truncate slds-size_1-of-4 slds-align_absolute-center slds-m-horizontal_xxx-small">
+                    <a href="#" class="slds-text-link_reset">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>0</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</apex:component>

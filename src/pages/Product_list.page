@@ -1,0 +1,138 @@
+<apex:page id="Product_list" controller="ProductListController" standardStylesheets="false"
+         showHeader="false" applyHtmlTag="false"  docType="html-5.0">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <head>
+            <apex:includeScript value="{!URLFOR($Resource.Jquery)}"/>
+            <apex:includeScript value="{!URLFOR($Resource.JqSession)}"/>
+            <script type="module" src="{!URLFOR($Resource.productController)}"/>
+            <apex:includeScript value="{!URLFOR($Resource.paginationJS)}"/>
+            <script type="module" src="{!URLFOR($Resource.productListModule)}"/>
+            <meta charset="utf-8" />
+            <meta http-equiv="x-ua-compatible" content="ie=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+                  integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"/>
+            <apex:slds />
+            <apex:stylesheet value="{!URLFOR($Resource.details)}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.headerStyle)}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.mainStyle)}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.crossIcon)}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.pagination)}"/>
+            <style type="text/css">a {text-decoration: none !important}</style>
+        </head>
+        <body>
+            <c:header/>
+            <div class="slds-scope">
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_3-of-12"/>
+                    <div class="slds-col slds-size_1-of-12 slds-m-vertical--xx-large">
+                        <span class="slds-align_absolute-center slds-text-align_center  slds-text-heading_small">Products on page:</span>
+                    </div>
+                    <div class="slds-col slds-size_1-of-11">
+                        <div id="productsGroup" class="slds-radio_button-group slds-align_absolute-center slds-m-vertical--xx-large">
+                            <span class="slds-button slds-radio_button">
+                                <input name="radio" checked="checked" type="radio" class="productsRadiobutton" id="5_products" value="5" />
+                                <label class="slds-radio_button__label" for="5_products">
+                                  <span class="slds-radio_faux">5</span>
+                                </label>
+                            </span>
+                            <span class="slds-button slds-radio_button">
+                                <input name="radio" type="radio" id="10_products" class="productsRadiobutton" value="10" />
+                                <label class="slds-radio_button__label" for="10_products">
+                                  <span class="slds-radio_faux">10</span>
+                                </label>
+                            </span>
+                            <span class="slds-button slds-radio_button">
+                                <input name="radio" type="radio" id="15_products" class="productsRadiobutton" value="15" />
+                                <label class="slds-radio_button__label" for="15_products">
+                                  <span class="slds-radio_faux">15</span>
+                                </label>
+                            </span>
+                            <span class="slds-button slds-radio_button">
+                                <input name="radio" type="radio" id="35_products" class="productsRadiobutton" value="35" />
+                                <label class="slds-radio_button__label" for="35_products">
+                                  <span class="slds-radio_faux">35</span>
+                                </label>
+                              </span>
+                            <span class="slds-button slds-radio_button">
+                                <input name="radio" type="radio" id="50_products" class="productsRadiobutton" value="50" />
+                                <label class="slds-radio_button__label" for="50_products">
+                                  <span class="slds-radio_faux">50</span>
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_3-of-12 slds-align_absolute-center  slds-m-vertical--xx-large slds-text-heading_small">
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                                <div class="slds-grid slds-gutters">
+                                    <div class="slds-col">
+                                        <input id="searchInput" placeholder="Search..." class="slds-input" type="text" value="" />
+                                    </div>
+                                    <div class="slds-col">
+                                        <label for="searchInput">
+                                            <button id="buttonSearch" class="slds-button slds-button_icon slds-button_icon-border" title="Search">
+                                                <svg class="slds-button__icon" aria-hidden="true">
+                                                    <use xlink:href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#search')}"></use>
+                                                </svg>
+                                                <span class="slds-assistive-text">Search</span>
+                                            </button>
+                                        </label>
+                                    </div>
+                                    <div class="slds-col">
+                                        <div id="sortGroup" class="slds-radio_button-group">
+                                            <span class="slds-button slds-radio_button">
+                                                <input name="sort" type="radio" id="sort" value="Sort" disabled="disabled"/>
+                                                <label class="slds-radio_button__label" for="sort">
+                                                  <span class="slds-radio_faux">Sort</span>
+                                                </label>
+                                            </span>
+                                            <span class="slds-button slds-radio_button">
+                                                <input name="sort" type="radio" class="sortRadiobutton" id="descSort" value="Desc" />
+                                                <label class="slds-radio_button__label" for="descSort">
+                                                  <span class="slds-radio_faux">Desc</span>
+                                                </label>
+                                            </span>
+                                            <span class="slds-button slds-radio_button">
+                                                <input name="sort" type="radio" id="ascSort" class="sortRadiobutton" value="Asc" />
+                                                <label class="slds-radio_button__label" for="ascSort">
+                                                  <span class="slds-radio_faux">Asc</span>
+                                                </label>
+                                            </span>
+                                            <span class="slds-button slds-radio_button">
+                                                <input name="sort" type="radio" id="nameSort" class="sortRadiobutton" value="Name" />
+                                                <label class="slds-radio_button__label" for="nameSort">
+                                                  <span class="slds-radio_faux">Name</span>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-12 slds-align_absolute-center slds-m-vertical--xx-large slds-text-heading_small"/>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_2-of-12"/>
+                    <div class="slds-col slds-size_8-of-12">
+                        <div class="slds-grid slds-wrap" id="products">
+                                <div class="slds-col slds-size_1-of-2 slds-align_absolute-center slds-m-bottom--x-large">
+                                    <!--Js render-->
+                                </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12 "/>
+                </div>
+                <div class="slds-grid slds-m-top--xx-large slds-m-bottom--x-large">
+                    <div class="slds-col slds-size_2-of-12"/>
+                    <div class="slds-col slds-size_8-of-12">
+                        <div id="pagination-container" class="slds-align_absolute-center paginationjs"></div>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12 "/>
+                </div>
+            </div>
+            <script src="{!URLFOR($Resource.productJs)}"/>
+        </body>
+    </html>
+</apex:page>

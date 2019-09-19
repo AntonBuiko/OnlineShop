@@ -1,0 +1,25 @@
+
+<apex:page id="DetailPage" controller="DetailPageController">
+    <apex:form>
+        <apex:pageBlock>
+            <apex:pageBlockSection columns="2">
+                <apex:commandLink action="{!toProductList}" value="to Shopping"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:sectionHeader title="{!product.Name}"/>
+        <apex:pageBlock>
+            <apex:pageBlockSection title="Amount">
+                <apex:outputLabel value="{!product.Amount__c}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Title">
+                <apex:outputLabel value="{!product.Title__c}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Description">
+                <apex:outputField value="{!product.Description__c}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Image">
+                <apex:image url="{!product.Img_Url__c}" width="150" height="150"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

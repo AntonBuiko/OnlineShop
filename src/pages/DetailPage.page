@@ -1,0 +1,65 @@
+
+<apex:page id="DetailPage" controller="ProductListController" standardStylesheets="false"
+                                      showHeader="false" applyHtmlTag="false"  docType="html-5.0">
+    <apex:remoteObjects jsNamespace="SObjectModel">
+        <apex:remoteObjectModel name="Product__c" jsShorthand="product"  fields="Id, Name">
+            <apex:remoteObjectField name="onlineStore__Contacts__c" jsShorthand="Contact"/>
+            <apex:remoteObjectField name="onlineStore__Cost__c" jsShorthand="Cost"/>
+            <apex:remoteObjectField name="onlineStore__Amount__c" jsShorthand="Amount"/>
+            <apex:remoteObjectField name="onlineStore__Date_of_purchase__c" jsShorthand="Date_of_purchase"/>
+            <apex:remoteObjectField name="onlineStore__Date_of_receipt__c" jsShorthand="Date_of_receipt"/>
+            <apex:remoteObjectField name="onlineStore__Img_Url__c" jsShorthand="Img_Url"/>
+            <apex:remoteObjectField name="onlineStore__Number_of_purchase__c" jsShorthand="Number_of_purchase"/>
+            <apex:remoteObjectField name="onlineStore__Store__c" jsShorthand="Store"/>
+            <apex:remoteObjectField name="onlineStore__Title__c" jsShorthand="Title"/>
+            <apex:remoteObjectField name="RecordTypeId" jsShorthand="RecordType"/>
+            <apex:remoteObjectField name="onlineStore__Description__c" jsShorthand="Description"/>
+        </apex:remoteObjectModel>
+    </apex:remoteObjects>
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+    <head>
+        <apex:includeScript value="{!URLFOR($Resource.Jquery)}"/>
+        <apex:includeScript value="{!URLFOR($Resource.JqSession)}"/>
+        <apex:includeScript value="{!URLFOR($Resource.detailsJs)}"/>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+              integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"/>
+        <apex:slds />
+        <apex:stylesheet value="{!URLFOR($Resource.details)}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.headerStyle)}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.mainStyle)}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.crossIcon)}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.pagination)}"/>
+        <style type="text/css">a {text-decoration: none !important}</style>
+    </head>
+    <body>
+    <c:header/>
+    <div class="slds-scope">
+        <div class="slds-grid ">
+            <div class="slds-col slds-size_4-of-12"/>
+            <div class="slds-col slds-size_4-of-12 slds-m-top--xx-large">
+                <span class="slds-text-heading_large">Details Page</span>
+            </div>
+            <div class="slds-col slds-size_4-of-12"></div>
+        </div>
+        <div class="slds-grid ">
+            <div class="slds-col slds-size_2-of-12"/>
+            <div id="detailProduct" class="slds-col slds-8-of-12 slds-m-top--xx-large">
+
+            </div>
+            <div class="slds-col slds-size_2-of-12"></div>
+        </div>
+        <div class="slds-grid ">
+            <div class="slds-col slds-size_8-of-12"/>
+            <div class="slds-col slds-size_2-of-12">
+                <button id="checkout" class="slds-button slds-button_neutral"><a href="{!URLFOR($Page.BuyProduct)}">Buy it now</a></button>
+                <button class="slds-button slds-button_neutral"><a href="{!URLFOR($Page.Product_list)}">Continue shopping</a></button>
+            </div>
+            <div class="slds-col slds-size_2-of-12"/>
+        </div>
+    </div>
+    </body>
+    </html>
+</apex:page>
