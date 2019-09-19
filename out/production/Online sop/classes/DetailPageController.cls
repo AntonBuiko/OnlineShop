@@ -24,4 +24,8 @@ public class DetailPageController {
     public void estMethod2(){}
 
     public void estMethod3(){}
+
+
+    public void estMethod4(){}
+
 }
