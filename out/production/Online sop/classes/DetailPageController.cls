@@ -19,4 +19,7 @@ public class DetailPageController {
     }
 
     public void estMethod(){}
+
+
+    public void estMethod2(){}
 }
