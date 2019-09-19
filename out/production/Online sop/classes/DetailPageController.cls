@@ -17,4 +17,6 @@ public class DetailPageController {
         PageReference pr = Page.Product_list;
         return pr;
     }
+
+    public void estMethod(){}
 }
